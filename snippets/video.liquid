@@ -1,0 +1,19 @@
+<div class="img-wrapper">
+    {% if type == 'vimeo' %}
+    <iframe src="{{video}}" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+    {% elsif type == 'youtube' %}
+  
+    {% assign videoUrl = video %}
+    {% if videoUrl contains 'watch' %}
+    {% assign videoId = videoUrl | split: '?v=' | last %}
+    {% else %}
+    {% assign videoId = videoUrl | split: 'youtu.be/' | last %}
+    {% endif %}
+    <iframe src="https://www.youtube.com/embed/{{videoId}}?loop=1&modestbranding=1&playlist={{videoId}}" frameborder="0"
+        allowfullscreen></iframe>
+    {% else %}
+    <video autoplay="true" loop="false" controls>
+        <source src="{{video}}" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
+    </video>
+    {% endif %}
+ </div>
